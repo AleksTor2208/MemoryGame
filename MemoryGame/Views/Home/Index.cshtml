@@ -1,10 +1,21 @@
 ﻿@model MemoryGame.Factory.Card[]
 
 <h3>Memory Game</h3>
-
-@for (int i = 0; i < @Model.Length; i++)
-{
-    <img src="@Model[i].ImageValue" alt="img" width="75" height="75"/>
-}
-
-
+<div class="Images">
+    @for (int i = 0; i < @Model.Length; i++)
+    {
+        <img id="@i" src="@Model[i].ImageValue" alt="img" width="75" height="75" />
+    }
+</div>
+<script>
+    var images = document.getElementsByClassName("Images")[0];
+    var imagesVal = images.getElementsByTagName("img");
+    var imagesLength = images.getElementsByTagName("img").length;
+    alert(imagesLength);
+    for (var i = 0; i < imagesLength; i++) {
+        imagesVal[i].addEventListener('click', function () {
+            alert(this.id); 
+        });
+    }
+    
+</script>
