@@ -7,15 +7,4 @@
         <img id="@i" src="@Model[i].ImageValue" alt="img" width="75" height="75" />
     }
 </div>
-<script>
-    var images = document.getElementsByClassName("Images")[0];
-    var imagesVal = images.getElementsByTagName("img");
-    var imagesLength = images.getElementsByTagName("img").length;
-    alert(imagesLength);
-    for (var i = 0; i < imagesLength; i++) {
-        imagesVal[i].addEventListener('click', function () {
-            alert(this.id); 
-        });
-    }
-    
-</script>
+
