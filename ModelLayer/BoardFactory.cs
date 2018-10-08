@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
-using System.Web;
 
-namespace MemoryGame.Factory
+namespace ModelLayer
 {
     public class BoardFactory
     {
@@ -80,8 +77,6 @@ namespace MemoryGame.Factory
 
         private void SetCardToEndBoard(Card card, Card[] endBoard)
         {
-            
-
         }
 
         private Random GetRandom()
@@ -89,7 +84,5 @@ namespace MemoryGame.Factory
             if (rnd == null) return new Random(Guid.NewGuid().GetHashCode());
             return rnd;
         }
-
-
     }
 }

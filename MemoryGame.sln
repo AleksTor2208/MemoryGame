@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryGame", "MemoryGame\MemoryGame.csproj", "{F58C6014-8916-4B5E-8E3A-1C6596338D97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLayer", "ModelLayer\ModelLayer.csproj", "{638F9823-FC78-482D-B47B-8ED2EFC701B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{A4B4914E-AA57-4CC9-A514-27FCCA888C74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{F58C6014-8916-4B5E-8E3A-1C6596338D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F58C6014-8916-4B5E-8E3A-1C6596338D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F58C6014-8916-4B5E-8E3A-1C6596338D97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638F9823-FC78-482D-B47B-8ED2EFC701B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638F9823-FC78-482D-B47B-8ED2EFC701B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638F9823-FC78-482D-B47B-8ED2EFC701B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638F9823-FC78-482D-B47B-8ED2EFC701B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B4914E-AA57-4CC9-A514-27FCCA888C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B4914E-AA57-4CC9-A514-27FCCA888C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B4914E-AA57-4CC9-A514-27FCCA888C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B4914E-AA57-4CC9-A514-27FCCA888C74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

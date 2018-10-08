@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MemoryGame.Factory;
 
-namespace MemoryGame.Models
+
+namespace ModelLayer
 {
     public class Game
     {
