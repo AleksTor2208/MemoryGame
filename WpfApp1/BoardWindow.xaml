@@ -4,9 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:uc="clr-namespace:WpfApp1"
+        xmlns:converters="clr-namespace:WpfApp1.Converters"
+
         mc:Ignorable="d"
-        Title="BoardWindow" Height="300" Width="300">
-    <Grid >
-      <TextBlock 
-   </Grid>
+        Title="BoardWindow" Height="800" Width="800">
+    <Window.Resources>
+        <converters:Base64ToImageConverter x:Key="Base64ToImageConverter" />
+    </Window.Resources>
+            <Grid>
+        <ListBox x:Name="ImagesCollectionName" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="{Binding ImageValue, Converter={StaticResource Base64ToImageConverter}}"
+                               Stretch="None"
+                               Width="135"
+                               Height="135"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
 </Window>

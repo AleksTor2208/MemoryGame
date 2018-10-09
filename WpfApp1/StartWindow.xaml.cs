@@ -10,26 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModelLayer;
 
 namespace WpfApp1
 {
    /// <summary>
-   /// Логика взаимодействия для MainWindow.xaml
+   /// Interaction logic for StartWindow.xaml
    /// </summary>
-   public partial class MainWindow : Window
+   public partial class StartWindow : Window
    {
-
+     
       private Card[] cards;
-      
-      public MainWindow()
+
+      public StartWindow()
       {
-         InitializeComponent();
+         //InitializeComponent();
       }
 
-      public MainWindow(Card[] cards)
+      public StartWindow(Card[] cards)
       {
          InitializeComponent();
          this.cards = cards;
@@ -39,8 +38,9 @@ namespace WpfApp1
       {
          //var win2 = new CardsControl(cards);
          var win2 = new BoardWindow(cards);
-         win2.ShowDialog();
          this.Close();
+         win2.ShowDialog();
+         
       }
    }
 }

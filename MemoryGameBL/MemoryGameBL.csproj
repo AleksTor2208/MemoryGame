@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{638F9823-FC78-482D-B47B-8ED2EFC701B2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModelLayer</RootNamespace>
-    <AssemblyName>ModelLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <ProjectGuid>{18C74623-4CF1-4BE8-BE39-E5C853B1E0F9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MemoryGameBL</RootNamespace>
+    <AssemblyName>MemoryGameBL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,44 +34,37 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
-    </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardFactory.cs" />
-    <Compile Include="ExtentionMethods.cs" />
-    <Compile Include="Models\Card.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\image0.jpg" />
-    <Content Include="Images\image1.jpg" />
-    <Content Include="Images\image10.jpg" />
-    <Content Include="Images\image11.jpg" />
-    <Content Include="Images\image12.jpg" />
-    <Content Include="Images\image13.jpg" />
-    <Content Include="Images\image2.jpg" />
-    <Content Include="Images\image3.jpg" />
-    <Content Include="Images\image4.jpg" />
-    <Content Include="Images\image5.jpg" />
-    <Content Include="Images\image6.jpg" />
-    <Content Include="Images\image7.jpg" />
-    <Content Include="Images\image8.jpg" />
-    <Content Include="Images\image9.jpg" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\ModelLayer\ModelLayer.csproj">
+      <Project>{638f9823-fc78-482d-b47b-8ed2efc701b2}</Project>
+      <Name>ModelLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfApp1\WpfApp1.csproj">
+      <Project>{a4b4914e-aa57-4cc9-a514-27fcca888c74}</Project>
+      <Name>WpfApp1</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

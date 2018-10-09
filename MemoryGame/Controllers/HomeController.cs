@@ -10,12 +10,12 @@ namespace MemoryGame.Controllers
 {
     public class HomeController : Controller
     {
-        public Game game = new Game();
+        //public Game game = new Game();
 
-        public ActionResult Index()
-        {
-            game.InitGame();
-            return View(game.Board);
-        }
+        //public ActionResult Index()
+        //{
+        //    game.InitGame();
+        //    return View(game.Board);
+        //}
     }
 }
