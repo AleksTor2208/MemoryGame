@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="StartWindow" Height="450" Width="800">
+        Title="START GAME" Height="450" Width="800">
     <StackPanel>
         <TextBlock Text="Choose Mode:"/>
-        <Button Content="Single Player" Click="SinglePlayerButtonClick"/>
-        <Button Content="Multiple Player"/>
+        <Button Content="Single Player" 
+                Click="SinglePlayerButtonClick"
+                Margin="50 80 0 50"
+                Width="250"
+                Height="50"/>
+        <!--TODO:-->
+        <!--<Button Content="Multiple Player"/>-->
     </StackPanel>
 </Window>

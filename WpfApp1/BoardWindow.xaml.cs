@@ -79,9 +79,6 @@ namespace WpfApp1
          bi.BeginInit();
          bi.StreamSource = new MemoryStream(binaryData);
          bi.EndInit();
-
-         //Image img = new Image();
-         //img.Source = bi;
          return bi;
       }
 

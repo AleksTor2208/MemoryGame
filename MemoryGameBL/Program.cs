@@ -14,8 +14,6 @@ namespace MemoryGameBL
       static void Main(string[] args)
       {
          var cards = new Game().GetData();
-         //StartWindow win = new StartWindow(cards);
-         //win.Show();
          var application = new System.Windows.Application();
          application.Run(new StartWindow(cards));
       }
