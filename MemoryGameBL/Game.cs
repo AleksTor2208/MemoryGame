@@ -24,9 +24,5 @@ namespace MemoryGameBL
          return new BoardFactory().InitBoard();
       }
 
-      public void Start()
-      {
-        
-      }
    }
 }

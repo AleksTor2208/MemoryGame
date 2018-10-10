@@ -11,16 +11,27 @@
         Title="BoardWindow" Height="800" Width="800">
     <Window.Resources>
         <converters:Base64ToImageConverter x:Key="Base64ToImageConverter" />
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-            <Grid>
+    <Grid>
         <ListBox x:Name="ImagesCollectionName" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <Image Source="{Binding ImageValue, Converter={StaticResource Base64ToImageConverter}}"
-                               Stretch="None"
-                               Width="135"
-                               Height="135"/>
+                        <Button x:Name="image_button" Style="{StaticResource ImageButtonStyle}" Click="ImageButton_Click">
+                            <Image  Source="{Binding ., Converter={StaticResource Base64ToImageConverter}}"
+                                   Width="135"
+                                   Height="135"
+                            />
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

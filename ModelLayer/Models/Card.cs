@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Dynamic;
 using System.IO;
 using System.Reflection;
 using System.Web;
@@ -11,27 +13,84 @@ using Image = System.Drawing.Image;
 
 namespace ModelLayer
 {
-    public class Card
-    {
-        //public readonly string ImageValue;
-        //public readonly string ImageName;
+   public class Card : INotifyPropertyChanged
+   {
+      //public readonly string ImgSource;
+      //public readonly string ImageName;
 
-       public string ImageValue { get; set; }
-       public string ImageName { get; set; }
-       public Image Image { get; set; }
+      private string _imgSource;
 
-      public Card(string imageName, string imageValue)
-        {
-            ImageName = imageName;
-            ImageValue = imageValue;
-        }
+      private string _imgValue;
 
-      // private Image ConvertToImage(string imageValue)
+      public string ImgValue
+      {
+         get { return _imgValue; }
+         set
+         {
+            SetImageValue(value);
+            OnPropertyChanged("ImgValue");
+         }
+      }
+
+      private void SetImageValue(string value)
+      {
+         switch (Inverted)
+         {
+            case (true): _imgValue = _imgSource;
+               break;
+            case (false): _imgValue = Card.GetBackSideImage();
+               break;
+         }
+      }
+
+      public string ImageName { get; set; }
+
+      private bool _inverted;
+
+      public bool Inverted
+      {
+         get { return _inverted;}
+         set
+         {
+            _inverted = value;
+            if (_inverted == true)
+            {
+               ImgValue = _imgSource;
+            }
+            OnPropertyChanged("Inverted");
+         }
+      }
+
+      private static string backSideImageSrc;
+
+
+      public static string GetBackSideImage()
+      {
+         if (backSideImageSrc != null)
+         {
+            return backSideImageSrc;
+         }
+         string dir = GetImagePath(@"..\..\..\ModelLayer\Images\cardBackSideImage");
+         string filename = Path.Combine(dir, $"Triplicate_back2.jpg");
+         var bitmap = (Bitmap)System.Drawing.Image.FromFile(filename);
+         byte[] imageAsByteArr = bitmap.ToByteArray(ImageFormat.Bmp);
+         backSideImageSrc = Convert.ToBase64String(imageAsByteArr);
+         return backSideImageSrc;
+      }
+
+      public Card(string imageName, string imgSource)
+      {
+         ImageName = imageName;
+         _imgSource = imgSource;
+         Inverted = false;
+      }
+
+      // private Image ConvertToImage(string imgSource)
       // {
       //    Image image;
-      //    if (imageValue != null)
+      //    if (imgSource != null)
       //    {
-      //       var imageBytes = System.Convert.FromBase64String(imageValue);
+      //       var imageBytes = System.Convert.FromBase64String(imgSource);
       //       using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
       //       {
       //          image = Image.FromStream(ms, true);
@@ -58,23 +117,37 @@ namespace ModelLayer
       //    image.Source = bi;
       //}
 
-       public static Card InitCard(int index)
-        {
-         var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-         var iconPath = Path.Combine(outPutDirectory, @"..\..\..\ModelLayer\Images");
-         string dir = new Uri(iconPath).LocalPath;
+      public static Card InitCard(int index)
+      {
+         string dir = GetImagePath(@"..\..\..\ModelLayer\Images");
          string filename = Path.Combine(dir, $"image{index}.jpg");
          var bitmap = (Bitmap)System.Drawing.Image.FromFile(filename);
          byte[] imageAsByteArr = bitmap.ToByteArray(ImageFormat.Bmp);
          var base64 = Convert.ToBase64String(imageAsByteArr);
-        // var imageSrc = $"data:image/gif;base64,{base64}";
+         // var imageSrc = $"data:image/gif;base64,{base64}";
          var imageSrc = base64;
          return new Card($"image{index}", imageSrc);
-        }
+      }
 
-       public override string ToString()
-       {
-          return ImageName;
-       }
-    }
+      private static string GetImagePath(string relativePath)
+      {
+         var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
+         var iconPath = Path.Combine(outPutDirectory, relativePath);
+         return new Uri(iconPath).LocalPath;
+      }
+
+
+      public override string ToString()
+      {
+         return ImageName;
+      }
+
+      public event PropertyChangedEventHandler PropertyChanged;
+
+      private void OnPropertyChanged(string propertyName)
+      {
+         var handler = PropertyChanged;
+         if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+      }
+   }
 }

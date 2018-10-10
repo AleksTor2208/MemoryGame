@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using ModelLayer;
 
 namespace WpfApp1.Converters
 {
@@ -22,7 +23,20 @@ namespace WpfApp1.Converters
 
       public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
       {
-         string base64Value = value?.ToString();
+         Card currentCard = value as Card;
+         if (currentCard == null)
+            return null;
+
+         if (currentCard.Inverted == false)
+         {
+            var backSideCardSrc = Card.GetBackSideImage();
+            return SecureConvertToBmpSource(backSideCardSrc);
+         }
+         return SecureConvertToBmpSource(currentCard.ImgValue);
+      }
+
+      private BitmapSource SecureConvertToBmpSource(string base64Value)
+      {
          if (base64Value == null)
          {
             return null;
