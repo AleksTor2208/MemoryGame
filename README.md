@@ -8,7 +8,7 @@ Once you download the repository build the entire solution. Then set MemoryGameB
 
 ### Prerequisites
 
-- You need to have Visual Studio installed on your computer with .NET Framework not less then 4.62,
+- You need to have Visual Studio installed on your computer with .NET Framework not less then 4.62.
 
 ### How to play
 
