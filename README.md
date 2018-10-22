@@ -1,10 +1,10 @@
 # Memory Game
 
-Simple desktop game implemented with C# and WPF. 
+desktop game implemented with C# and WPF. 
 
 ## Getting Started
 
-Once you download the repository build the entire solution. Then set MemoryGameBL project as StartUp project and press Start.
+Once you download the repository build the entire solution. Then set MemoryGameBL as StartUp project and press Start.
 
 ### Prerequisites
 
