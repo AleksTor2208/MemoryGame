@@ -1,6 +1,6 @@
 # Memory Game
 
-desktop game implemented with C# and WPF. 
+Desktop game implemented with C# and WPF. 
 
 ## Getting Started
 
