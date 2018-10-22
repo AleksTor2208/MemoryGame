@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ModelLayer;
 
 namespace WpfApp1
@@ -29,7 +23,7 @@ namespace WpfApp1
          InitializeComponent();
       }
 
-      public BoardWindow(ModelLayer.Card[] cards)
+      public BoardWindow(Card[] cards)
       {
          InitializeComponent();
          this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -37,14 +31,8 @@ namespace WpfApp1
          double occupiedScreenHeight = 0.8;
          this.Width = SystemParameters.PrimaryScreenWidth * occupiedScreenWidth;
          this.Height = SystemParameters.PrimaryScreenHeight * occupiedScreenHeight;
-         ImagesCollectionName.ItemsSource = cards;
-         //InitializeComponent();
-         //this.Title = "Game Board";
-         //if (ImagesControlName == null)
-         //{
-         //   ImagesControlName = new CardsControl();
-         //}
-         //ImagesControlName.Cards = new CardsViewModel(cards);
+         //ImagesCollectionName.ItemsSource = cards;
+         this.DataContext = cards;
       }
 
       private void ImageButton_Click(object sender, RoutedEventArgs e)
@@ -52,12 +40,30 @@ namespace WpfApp1
          var contxt = (sender as Button)?.Content;
          var data = (contxt as Image)?.DataContext;
          var card = (data as Card);
-         if (card != null) card.Inverted = true;
-         //(contxt as Image).BeginInit();
-         SetImage(contxt as Image);
-
-         //data.Inverted = true
-         //this.MyImageSource = new BitmapImage(...); //you change source of the Image
+         if (card == null) return;
+         var cardsList = new List<Card>();
+         foreach (var currentCard in ImagesCollectionName.ItemsSource)
+         {
+            cardsList.Add(currentCard as Card);
+         }
+         var tempCard = cardsList.FirstOrDefault(c => c.ImageName.Equals(card.ImageName) 
+                                          && c.CardType.Equals(card.CardType));
+         if (tempCard.Inverted == true) return;
+         SingleMove.SetCard(tempCard);
+         tempCard.Inverted = true;
+         tempCard.RefreshImgValue();
+         System.Threading.Thread.Sleep(30);
+         if (SingleMove.TwoCardsSet)
+         {
+               cardsList.Where(c => c.ImageName == SingleMove.FirstCard.ImageName || c.ImageName == SingleMove.SecondCard.ImageName)
+                        .ToList()
+                        .ForEach(c => 
+                        {
+                           c.Inverted = SingleMove.FirstEqualsSecond();
+                           c.RefreshImgValue();
+                        });
+               SingleMove.Clear();
+         }
       }
 
       private void SetImage(Image image)
@@ -68,7 +74,6 @@ namespace WpfApp1
          image.BeginInit();
          image.Source = Base64StringToBitmap(card.ImgValue);
          image.EndInit();
-
       }
 
       public static ImageSource Base64StringToBitmap(string base64String)
@@ -89,6 +94,5 @@ namespace WpfApp1
          var handler = PropertyChanged;
          if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
       }
-
    }
 }

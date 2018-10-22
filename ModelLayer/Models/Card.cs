@@ -18,7 +18,11 @@ namespace ModelLayer
       //public readonly string ImgSource;
       //public readonly string ImageName;
 
-      private string _imgSource;
+      public readonly string ImageSource;
+
+      public readonly string ImageName;
+
+      public readonly CardType CardType;
 
       private string _imgValue;
 
@@ -27,23 +31,21 @@ namespace ModelLayer
          get { return _imgValue; }
          set
          {
-            SetImageValue(value);
+            _imgValue = value;
             OnPropertyChanged("ImgValue");
          }
       }
 
-      private void SetImageValue(string value)
-      {
-         switch (Inverted)
-         {
-            case (true): _imgValue = _imgSource;
-               break;
-            case (false): _imgValue = Card.GetBackSideImage();
-               break;
-         }
-      }
-
-      public string ImageName { get; set; }
+      //private void SetImageValue(string value)
+      //{
+      //   switch (Inverted)
+      //   {
+      //      case (true): _imgValue = ImageSource;
+      //         break;
+      //      case (false): _imgValue = Card.GetBackSideImage();
+      //         break;
+      //   }
+      //}
 
       private bool _inverted;
 
@@ -53,12 +55,21 @@ namespace ModelLayer
          set
          {
             _inverted = value;
-            if (_inverted == true)
-            {
-               ImgValue = _imgSource;
-            }
-            OnPropertyChanged("Inverted");
+            //if (_inverted == true)
+            //{
+            //   ImgValue = ImageSource;
+            //}
+            //OnPropertyChanged("Inverted");
          }
+      }
+
+      public Card(string imageName, string imgSource, CardType cardType = CardType.First)
+      {
+         ImageName = imageName;
+         ImageSource = imgSource;
+         ImgValue = Card.GetBackSideImage();
+         Inverted = false;
+         CardType = cardType;
       }
 
       private static string backSideImageSrc;
@@ -78,11 +89,17 @@ namespace ModelLayer
          return backSideImageSrc;
       }
 
-      public Card(string imageName, string imgSource)
+      public void RefreshImgValue()
       {
-         ImageName = imageName;
-         _imgSource = imgSource;
-         Inverted = false;
+
+         if (this.Inverted != true)
+         {
+            ImgValue = Card.GetBackSideImage();
+         }
+         else
+         {
+            ImgValue = ImageSource;
+         }
       }
 
       // private Image ConvertToImage(string imgSource)
@@ -137,10 +154,22 @@ namespace ModelLayer
       }
 
 
-      public override string ToString()
+      //public override string ToString()
+      //{
+      //   return ImageName;
+      //}
+
+      public override bool Equals(object obj)
       {
-         return ImageName;
+         return base.Equals(obj) && (obj as Card).CardType == this.CardType;
       }
+
+
+      public override int GetHashCode()
+      {
+         return base.GetHashCode();
+      }
+
 
       public event PropertyChangedEventHandler PropertyChanged;
 

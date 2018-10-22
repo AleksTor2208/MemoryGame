@@ -22,12 +22,14 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <ListBox x:Name="ImagesCollectionName" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ListBox x:Name="ImagesCollectionName" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding }">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <Button x:Name="image_button" Style="{StaticResource ImageButtonStyle}" Click="ImageButton_Click">
-                            <Image  Source="{Binding ., Converter={StaticResource Base64ToImageConverter}}"
+                            <Image  Source="{Binding ImgValue, Converter={StaticResource Base64ToImageConverter}}"
                                    Width="135"
                                    Height="135"
                             />

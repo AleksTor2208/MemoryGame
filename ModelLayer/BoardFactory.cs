@@ -54,7 +54,8 @@ namespace ModelLayer
             {
                 foreach (var card in board)
                 {
-                    endBoard.Add(card);
+                    CardType cardType = i == 0 ? CardType.First : CardType.Second;
+                    endBoard.Add(new Card(card.ImageName, card.ImageSource, cardType));
                 }
             }
             return endBoard.ToArray();

@@ -23,16 +23,16 @@ namespace WpfApp1.Converters
 
       public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
       {
-         Card currentCard = value as Card;
-         if (currentCard == null)
-            return null;
+         //Card currentCard = value as Card;
+         //if (currentCard == null)
+         //   return null;
 
-         if (currentCard.Inverted == false)
-         {
-            var backSideCardSrc = Card.GetBackSideImage();
-            return SecureConvertToBmpSource(backSideCardSrc);
-         }
-         return SecureConvertToBmpSource(currentCard.ImgValue);
+         //if (currentCard.Inverted == false)
+         //{
+         //   var backSideCardSrc = Card.GetBackSideImage();
+         //   return SecureConvertToBmpSource(backSideCardSrc);
+         //}
+         return value != null ? SecureConvertToBmpSource(value.ToString()) : null;
       }
 
       private BitmapSource SecureConvertToBmpSource(string base64Value)
